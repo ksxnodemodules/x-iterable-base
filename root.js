@@ -8,9 +8,7 @@
 
 	class RootClass {};
 
-	module.exports = {
-		class: RootClass
-	};
+	module.exports = RootClass;
 
 	RootClass.IterableBased = class extends RootClass {
 
