@@ -64,7 +64,7 @@
 			}
 
 			every(callback) {
-				return !this.every((element) => !callback(element, this));
+				return !this.some((element) => !callback(element, this));
 			}
 
 			reduce(callback, init) {
