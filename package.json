@@ -1,0 +1,37 @@
+
+{
+	"name": "x-iterable-base",
+	"description": "Provides x-iterable class template",
+	"version": "0.0.0",
+	"author": "Hoàng Văn Khải <hvksmr1996@gmail.com>",
+	"contributors": [
+		"Hoàng Văn Khải <hvksmr1996@gmail.com>"
+	],
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ksxnodemodules/x-iterable-base.git"
+	},
+	"engines": {
+		"node": ">=6.0.0"
+	},
+	"dependencies": {
+		"simple-class-utils": ">=0.0.4 <2.0.0",
+		"simple-function-utils": ">=2.1.2 <3.0.0"
+	},
+	"main": "index.js",
+	"keywords": [
+		"iterator",
+		"iterable",
+		"x-iterator",
+		"x-iterable",
+		"extensible-iterator",
+		"extensible-iterable",
+        "iterable-class-template",
+        "iterable-class-methods"
+	],
+	"bugs": {
+		"url": "https://github.com/ksxnodemodules/x-iterable-base/issues"
+	},
+	"homepage": "https://github.com/ksxnodemodules/x-iterable-base#readme"
+}
