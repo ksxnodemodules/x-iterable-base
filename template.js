@@ -14,18 +14,18 @@
 
 		class XIterable extends Super {
 
-			* transformGenerator(callback) {
+			* mapGenerator(callback) {
 				for (let element of this) {
 					yield callback(element, this);
 				}
 			}
 
-			transformOnce(callback) {
-				return new createClass.Yield(this.transformGenerator(callback));
+			mapOnce(callback) {
+				return new createClass.Yield(this.mapGenerator(callback));
 			}
 
-			transform(callback) {
-				return new createClass.AssignIterator(() => this.transformGenerator(callback));
+			map(callback) {
+				return new createClass.AssignIterator(() => this.mapGenerator(callback));
 			}
 
 			* filterGenerator(callback) {
@@ -36,11 +36,11 @@
 				}
 			}
 
-			filterOnceIterable(callback) {
+			filterOnce(callback) {
 				return new createClass.Yield(this.filterGenerator(callback));
 			}
 
-			filterIterable(callback) {
+			filter(callback) {
 				return new createClass.AssignIterator(() => this.filterGenerator(callback));
 			}
 
@@ -52,10 +52,6 @@
 				for (let element of this) {
 					callback(element, this);
 				}
-			}
-
-			map(callback) {
-				return this.Array.from(this.transformOnce(callback));
 			}
 
 			some(callback) {
@@ -71,22 +67,19 @@
 				return !this.every((element) => !callback(element, this));
 			}
 
-			filter(callback) {
-				return this.Array.from(this.filterIterable(callback));
-			}
-
 			reduce(callback, init) {
 				this.forEach((element) => {init = callback(init, element, this)});
 				return init;
 			}
 
-			spread(callback) {
-				if (typeof callback !== 'function') {
-					callback = this.spread.DEFAULT_CALLBACK;
-				}
-				var Result = this.Array;
-				return this.reduce((prev, now) => new Result(...prev, ...callback(now, this)), new Result());
-			}
+            spread(callback = this.spread.DEFAULT_CALLBACK) {
+                var self = this;
+                return new createClass.AssignIterator(function * () {
+                    for (let subsequence of self) {
+                        yield * callback(subsequence, this);
+                    }
+                });
+            }
 
 			get sumAsNum() {
 				return this.reduce((prev, now) => prev + Number(now), 0);
@@ -121,10 +114,6 @@
 				return this.most((challenger, champion) => challenger > champion, -Infinity);
 			}
 
-			toArray() {
-				return this.Array.from(this);
-			}
-
 			find(callback) {
 				for (let element of this) {
 					if (callback(element, this)) {
@@ -145,8 +134,6 @@
 
 		((proto) => {
 
-			proto.Array = Array;
-
 			proto.search.Result = class extends Root {
 				constructor(value, object) {
 					super();
@@ -155,7 +142,7 @@
 				}
 			};
 
-			proto.spread.ITERABLES = (element, self) => new self.Array(...element);
+			proto.spread.ITERABLES = (element) => element;
 			proto.spread.DEFAULT_CALLBACK = proto.spread.ITERABLES;
 
 			if (proto.has === undefined) {
