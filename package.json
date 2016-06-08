@@ -16,8 +16,8 @@
 		"node": ">=6.0.0"
 	},
 	"dependencies": {
-		"simple-class-utils": ">=0.0.4 <2.0.0",
-		"simple-function-utils": ">=2.1.2 <3.0.0"
+		"simple-class-utils": "^0.3.0",
+		"simple-function-utils": "^2.1.2"
 	},
 	"main": "index.js",
 	"keywords": [
