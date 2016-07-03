@@ -21,11 +21,18 @@
 			}
 
 			mapOnce(callback) {
-				return new createClass.Yield(this.mapGenerator(callback));
+				var gen = this.mapGenerator(callback);
+				return {
+					[_key_iterator]: () => gen,
+					__proto__: this
+				};
 			}
 
 			map(callback) {
-				return new createClass.AssignIterator(() => this.mapGenerator(callback));
+				return {
+					[_key_iterator]: () => this.mapGenerator(callback),
+					__proto__: this
+				};
 			}
 
 			* filterGenerator(callback) {
@@ -37,11 +44,18 @@
 			}
 
 			filterOnce(callback) {
-				return new createClass.Yield(this.filterGenerator(callback));
+				var gen = this.filterGenerator(callback);
+				return {
+					[_key_iterator]: () => gen,
+					__proto__: this
+				};
 			}
 
 			filter(callback) {
-				return new createClass.AssignIterator(() => this.filterGenerator(callback));
+				return {
+					[_key_iterator]: () => this.filterGenerator(callback),
+					__proto__: this
+				};
 			}
 
 			runthrough() {
@@ -74,11 +88,13 @@
 
             spread(callback = this.spread.DEFAULT_CALLBACK) {
                 var self = this;
-                return new createClass.AssignIterator(function * () {
-                    for (let subsequence of self) {
-                        yield * callback(subsequence, this);
-                    }
-                });
+				return {
+					* [_key_iterator]() {
+						for (let subsequence of self) {
+							yield * callback(subsequence, this);
+						}
+					}
+				};
             }
 
 			get sumAsNum() {
