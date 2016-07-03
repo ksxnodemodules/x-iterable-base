@@ -1,12 +1,12 @@
 
-((module) => {
+(module => {
 	'use strict';
 
 	var createClassFromSuper = require('simple-class-utils').createClass.super;
 	var bind = require('simple-function-utils/bind').begin;
 	var Root = require('./root.js');
 
-	var _key_iterator = Symbol.iterator;
+	var {iterator} = Symbol;
 
 	module.exports = createClass;
 
@@ -23,14 +23,14 @@
 			mapOnce(callback) {
 				var gen = this.mapGenerator(callback);
 				return {
-					[_key_iterator]: () => gen,
+					[iterator]: () => gen,
 					__proto__: this
 				};
 			}
 
 			map(callback) {
 				return {
-					[_key_iterator]: () => this.mapGenerator(callback),
+					[iterator]: () => this.mapGenerator(callback),
 					__proto__: this
 				};
 			}
@@ -46,20 +46,20 @@
 			filterOnce(callback) {
 				var gen = this.filterGenerator(callback);
 				return {
-					[_key_iterator]: () => gen,
+					[iterator]: () => gen,
 					__proto__: this
 				};
 			}
 
 			filter(callback) {
 				return {
-					[_key_iterator]: () => this.filterGenerator(callback),
+					[iterator]: () => this.filterGenerator(callback),
 					__proto__: this
 				};
 			}
 
 			runthrough() {
-				for (let gen = this[_key_iterator](); !gen.next().done; );
+				for (let gen = this[iterator](); !gen.next().done; );
 			}
 
 			forEach(callback) {
@@ -89,7 +89,7 @@
             spread(callback = this.spread.DEFAULT_CALLBACK) {
                 var self = this;
 				return {
-					* [_key_iterator]() {
+					* [iterator]() {
 						for (let subsequence of self) {
 							yield * callback(subsequence, this);
 						}
@@ -148,7 +148,7 @@
 
 		}
 
-		((proto) => {
+		(proto => {
 
 			proto.search.Result = class extends Root {
 				constructor(value, object) {
@@ -194,7 +194,7 @@
 		createClass(class extends createClass.fromGenerator.Root {
 			constructor(...args) {
 				super();
-				this[_key_iterator] = (...rest) => gen.call(this, ...args, ...rest);
+				this[iterator] = (...rest) => gen.call(this, ...args, ...rest);
 			}
 		}, ...args);
 
@@ -208,7 +208,7 @@
 	createClass.AssignIterator = createClass(class extends Root {
 		constructor(iterate) {
 			super();
-			this[_key_iterator] = iterate;
+			this[iterator] = iterate;
 		}
 	});
 
