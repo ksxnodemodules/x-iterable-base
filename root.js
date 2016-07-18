@@ -23,4 +23,6 @@
 
 	}
 
+	RootClass.prototype[Symbol.toStringTag] = 'XIterable'
+
 })(module);
