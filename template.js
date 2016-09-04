@@ -86,8 +86,8 @@
 				return init;
 			}
 
-            spread(callback = this.spread.DEFAULT_CALLBACK) {
-                var self = this;
+			spread(callback = this.spread.DEFAULT_CALLBACK) {
+				var self = this;
 				return {
 					* [iterator]() {
 						for (let subsequence of self) {
@@ -95,7 +95,7 @@
 						}
 					}
 				};
-            }
+			}
 
 			get sumAsNum() {
 				return this.reduce((prev, now) => prev + Number(now), 0);
