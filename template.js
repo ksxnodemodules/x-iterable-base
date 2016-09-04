@@ -93,7 +93,8 @@
 						for (let subsequence of self) {
 							yield * callback(subsequence, this);
 						}
-					}
+					},
+					__proto__: this
 				};
 			}
 
