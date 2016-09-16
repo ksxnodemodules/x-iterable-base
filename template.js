@@ -123,7 +123,7 @@ function XIterable (Super = XIterable.default, ...args) {
       }
     }
     has (element, equal = is) {
-      return Boolean(this.search(bind(element)))
+      return Boolean(this.search(bind(equal, element)))
     }
   }
 
