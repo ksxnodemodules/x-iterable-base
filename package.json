@@ -2,7 +2,7 @@
 {
 	"name": "x-iterable-base",
 	"description": "Provides x-iterable class template",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"author": "Hoàng Văn Khải <hvksmr1996@gmail.com>",
 	"contributors": [
 		"Hoàng Văn Khải <hvksmr1996@gmail.com>"
