@@ -19,7 +19,13 @@
 		"simple-class-utils": "^0.3.0",
 		"simple-function-utils": "^2.1.2"
 	},
+	"devDependencies": {
+		"standard": "8.0.0"
+	},
 	"main": "index.js",
+	"scripts": {
+		"test": "standard"
+	},
 	"keywords": [
 		"iterator",
 		"iterable",

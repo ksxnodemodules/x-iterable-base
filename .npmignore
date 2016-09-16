@@ -4,3 +4,4 @@ test
 */temp
 node_modules
 .git*
+.editorconfig

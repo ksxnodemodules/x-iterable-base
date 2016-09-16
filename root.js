@@ -1,28 +1,22 @@
 
 ((module) => {
-	'use strict';
+  'use strict'
 
-	var createClass = require('simple-class-utils').createClass;
+  var {iterator} = Symbol
 
-	var _key_iterator = Symbol.iterator;
+  class RootClass {};
 
-	class RootClass {};
+  module.exports = RootClass
 
-	module.exports = RootClass;
+  RootClass.IterableBased = class extends RootClass {
+    constructor (base) {
+      super()
+      this.base = base
+    }
+    * [iterator ] () {
+      yield * this.base
+    }
+  }
 
-	RootClass.IterableBased = class extends RootClass {
-
-		constructor(base) {
-			super();
-			this.base = base;
-		}
-
-		* [_key_iterator]() {
-			yield * this.base;
-		}
-
-	}
-
-	RootClass.prototype[Symbol.toStringTag] = 'XIterable'
-
-})(module);
+  RootClass.prototype[Symbol.toStringTag] = 'XIterable'
+})(module)
