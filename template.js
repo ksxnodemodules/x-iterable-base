@@ -1,10 +1,10 @@
 'use strict'
 
-var createClassFromSuper = require('simple-class-utils').createClass.super
-var bind = require('simple-function-utils/bind').begin
-var Root = require('./root.js')
-var {iterator} = Symbol
-var {is} = Object
+const createClassFromSuper = require('simple-class-utils').createClass.super
+const bind = require('simple-function-utils/bind').begin
+const Root = require('./root.js')
+const {iterator} = Symbol
+const {is} = Object
 
 module.exports = XIterable
 
@@ -16,7 +16,7 @@ function XIterable (Super = XIterable.default, ...args) {
       }
     }
     mapOnce (callback) {
-      var gen = this.mapGenerator(callback)
+      const gen = this.mapGenerator(callback)
       return {
         [iterator]: () => gen,
         __proto__: this
@@ -36,7 +36,7 @@ function XIterable (Super = XIterable.default, ...args) {
       }
     }
     filterOnce (callback) {
-      var gen = this.filterGenerator(callback)
+      const gen = this.filterGenerator(callback)
       return {
         [iterator]: () => gen,
         __proto__: this
@@ -72,7 +72,7 @@ function XIterable (Super = XIterable.default, ...args) {
       return init
     }
     spread (callback = this.spread.DEFAULT_CALLBACK) {
-      var self = this
+      const self = this
       return {
         * [ iterator ] () {
           for (let subsequence of self) {
@@ -137,7 +137,7 @@ function XIterable (Super = XIterable.default, ...args) {
     }
     proto.spread.ITERABLES = (element) => element
     proto.spread.DEFAULT_CALLBACK = proto.spread.ITERABLES
-    var superproto = Object.getPrototypeOf(proto)
+    const superproto = Object.getPrototypeOf(proto)
     makeMethodExists('join', function (...args) {
       return this.toArray().join(...args)
     })
