@@ -7,6 +7,7 @@
 	var Root = require('./root.js');
 
 	var {iterator} = Symbol;
+	var {is} = Object;
 
 	module.exports = createClass;
 
@@ -147,6 +148,10 @@
 				}
 			}
 
+			has (element, equal = is) {
+				return Boolean(this.search(bind(element)))
+			}
+
 		}
 
 		(proto => {
@@ -161,15 +166,6 @@
 
 			proto.spread.ITERABLES = (element) => element;
 			proto.spread.DEFAULT_CALLBACK = proto.spread.ITERABLES;
-
-			if (proto.has === undefined) {
-				Object.assign(proto, {
-					has(element, equal = this.equal.DEFAULT_EQUAL) {
-						return this.some(bind(equal, element));
-					}
-				});
-				proto.has.DEFAULT_EQUAL = Object.is;
-			}
 
 			var superproto = Object.getPrototypeOf(proto);
 
