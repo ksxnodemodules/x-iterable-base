@@ -1,6 +1,6 @@
 'use strict'
 
-var {iterator} = Symbol
+const {iterator} = Symbol
 
 class RootClass {};
 
