@@ -1,9 +1,7 @@
 'use strict'
 
 const {iterator} = Symbol
-
 class RootClass {};
-
 module.exports = RootClass
 
 RootClass.IterableBased = class extends RootClass {
