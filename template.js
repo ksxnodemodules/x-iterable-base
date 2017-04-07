@@ -15,6 +15,7 @@ function XIterable (Super = XIterable.default, ...args) {
         yield callback(element, this)
       }
     }
+
     mapOnce (callback) {
       const gen = this.mapGenerator(callback)
       return {
@@ -22,12 +23,14 @@ function XIterable (Super = XIterable.default, ...args) {
         __proto__: this
       }
     }
+
     map (callback) {
       return {
         [iterator]: () => this.mapGenerator(callback),
         __proto__: this
       }
     }
+
     * filterGenerator (callback) {
       for (let element of this) {
         if (callback(element, this)) {
@@ -35,6 +38,7 @@ function XIterable (Super = XIterable.default, ...args) {
         }
       }
     }
+
     filterOnce (callback) {
       const gen = this.filterGenerator(callback)
       return {
@@ -42,20 +46,24 @@ function XIterable (Super = XIterable.default, ...args) {
         __proto__: this
       }
     }
+
     filter (callback) {
       return {
         [iterator]: () => this.filterGenerator(callback),
         __proto__: this
       }
     }
+
     runthrough () {
       for (let gen = this[iterator](); !gen.next().done;);
     }
+
     forEach (callback) {
       for (let element of this) {
         callback(element, this)
       }
     }
+
     some (callback) {
       for (let element of this) {
         if (callback(element, this)) {
@@ -64,13 +72,16 @@ function XIterable (Super = XIterable.default, ...args) {
       }
       return false
     }
+
     every (callback) {
       return !this.some((element) => !callback(element, this))
     }
+
     reduce (callback, init) {
       this.forEach((element) => { init = callback(init, element, this) })
       return init
     }
+
     spread (callback = this.spread.DEFAULT_CALLBACK) {
       const self = this
       return {
@@ -82,18 +93,23 @@ function XIterable (Super = XIterable.default, ...args) {
         __proto__: this
       }
     }
+
     get sumAsNum () {
       return this.reduce((prev, now) => prev + Number(now), 0)
     }
+
     get productAsNum () {
       return this.reduce((prev, now) => prev * Number(now), 1)
     }
+
     get sumAsStr () {
       return this.reduce((prev, now) => prev + String(now), '')
     }
+
     get sumAsReservedStr () {
       return this.reduce((prev, now) => String(now) + prev, '')
     }
+
     most (callback, init) {
       for (let element of this) {
         if (callback(element, init, this)) {
@@ -102,12 +118,15 @@ function XIterable (Super = XIterable.default, ...args) {
       }
       return init
     }
+
     get min () {
       return this.most((challenger, champion) => challenger < champion, +Infinity)
     }
+
     get max () {
       return this.most((challenger, champion) => challenger > champion, -Infinity)
     }
+
     find (callback) {
       for (let element of this) {
         if (callback(element, this)) {
@@ -115,6 +134,7 @@ function XIterable (Super = XIterable.default, ...args) {
         }
       }
     }
+
     search (callback) {
       for (let element of this) {
         if (callback(element, this)) {
@@ -122,6 +142,7 @@ function XIterable (Super = XIterable.default, ...args) {
         }
       }
     }
+
     has (element, equal = is) {
       return Boolean(this.search(bind(equal, element)))
     }
@@ -135,18 +156,22 @@ function XIterable (Super = XIterable.default, ...args) {
         this.object = object
       }
     }
+
     proto.spread.ITERABLES = (element) => element
     proto.spread.DEFAULT_CALLBACK = proto.spread.ITERABLES
     const superproto = Object.getPrototypeOf(proto)
+
     makeMethodExists('join', function (...args) {
       return this.toArray().join(...args)
     })
+
     function makeMethodExists (fname, func) {
       if (typeof superproto[fname] !== 'function') {
         proto[fname] = func
       }
     }
   })(XIterable.prototype)
+
   return createClassFromSuper(XIterable, ...args)
 }
 
