@@ -146,6 +146,10 @@ function XIterable (Super = XIterable.default, ...args) {
     has (element, equal = is) {
       return Boolean(this.search(bind(equal, element)))
     }
+
+    to (hasFromMethod = Array, ...args) {
+      return hasFromMethod.from(this, ...args)
+    }
   }
 
   (proto => {
@@ -162,7 +166,7 @@ function XIterable (Super = XIterable.default, ...args) {
     const superproto = Object.getPrototypeOf(proto)
 
     makeMethodExists('join', function (...args) {
-      return this.toArray().join(...args)
+      return this.to(Array).join(...args)
     })
 
     function makeMethodExists (fname, func) {
