@@ -157,7 +157,7 @@ function XIterable (Super = XIterable.default, ...args) {
       }
     }
 
-    proto.spread.ITERABLES = (element) => element
+    proto.spread.ITERABLES = x => x
     proto.spread.DEFAULT_CALLBACK = proto.spread.ITERABLES
     const superproto = Object.getPrototypeOf(proto)
 
