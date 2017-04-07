@@ -1,22 +1,19 @@
+'use strict'
 
-((module) => {
-  'use strict'
+var {iterator} = Symbol
 
-  var {iterator} = Symbol
+class RootClass {};
 
-  class RootClass {};
+module.exports = RootClass
 
-  module.exports = RootClass
-
-  RootClass.IterableBased = class extends RootClass {
-    constructor (base) {
-      super()
-      this.base = base
-    }
-    * [iterator ] () {
-      yield * this.base
-    }
+RootClass.IterableBased = class extends RootClass {
+  constructor (base) {
+    super()
+    this.base = base
   }
+  * [iterator ] () {
+    yield * this.base
+  }
+}
 
-  RootClass.prototype[Symbol.toStringTag] = 'XIterable'
-})(module)
+RootClass.prototype[Symbol.toStringTag] = 'XIterable'
