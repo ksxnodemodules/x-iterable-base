@@ -6,7 +6,7 @@ const Root = require('./root.js')
 const {iterator} = Symbol
 const {is} = Object
 
-function XIterable (Super = XIterable.default, ...args) {
+function XIterable (Super = Root.IterableBased, ...args) {
   class XIterable extends Super {
     * mapGenerator (callback) {
       for (let element of this) {
@@ -179,7 +179,6 @@ function XIterable (Super = XIterable.default, ...args) {
 
 module.exports = XIterable
 
-XIterable.default = Root.IterableBased
 XIterable.fromGenerator = (gen, ...args) =>
   XIterable(class extends XIterable.fromGenerator.Root {
     constructor (...args) {
