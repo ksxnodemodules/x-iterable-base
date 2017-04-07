@@ -6,8 +6,6 @@ const Root = require('./root.js')
 const {iterator} = Symbol
 const {is} = Object
 
-module.exports = XIterable
-
 function XIterable (Super = XIterable.default, ...args) {
   class XIterable extends Super {
     * mapGenerator (callback) {
@@ -178,6 +176,8 @@ function XIterable (Super = XIterable.default, ...args) {
 
   return createClassFromSuper(XIterable, ...args)
 }
+
+module.exports = XIterable
 
 XIterable.default = Root.IterableBased
 XIterable.fromGenerator = (gen, ...args) =>
