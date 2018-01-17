@@ -28,13 +28,16 @@
   },
   "keywords": [
     "iterator",
-    "iterable",
+    "lazy",
     "x-iterator",
-    "x-iterable",
-    "extensible-iterator",
-    "extensible-iterable",
+    "method",
+    "extensible",
     "iterable-class-template",
-    "iterable-class-methods"
+    "iterable-class-methods",
+    "map",
+    "filter",
+    "reduce",
+    "for-each"
   ],
   "bugs": {
     "url": "https://github.com/ksxnodemodules/x-iterable-base/issues"
