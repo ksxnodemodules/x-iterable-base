@@ -10,8 +10,9 @@
 
 ## Requirements
 
- * Node >= 6.0.0
+  * Node >= 6.0.0
 
 ## Features
 
- * Provides x-iterable class template
+  * Lazy iterator transforming methods: `map`, `filter`, etc.
+  * Provides x-iterable class template
